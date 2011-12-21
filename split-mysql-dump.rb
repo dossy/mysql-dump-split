@@ -22,9 +22,9 @@ end
 if File.exist?(dumpfile)
     d = File.new(dumpfile, "r")
  
-    outfile = false
-    table = ""
     db = ""
+    table = "preamble"
+    outfile = File.new("#{db}_#{table}.sql", "w")
     linecount = tablecount = starttime = 0
  
     while (line = d.gets)
@@ -39,7 +39,7 @@ if File.exist?(dumpfile)
  
             starttime = Time.now
             outfile = File.new("#{db}_#{table}.sql", "w")
-        elsif line =~ /^USE .(.+).;/
+        elsif line =~ /^USE .(.+).;/ || line =~ /^-- Host: .+    Database: (.+)$/
             db = $1
             puts("Found a new db: #{db}")
         end
