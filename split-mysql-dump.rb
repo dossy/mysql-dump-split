@@ -54,5 +54,3 @@ if File.exist?(dumpfile)
 end
  
 puts
-
-
